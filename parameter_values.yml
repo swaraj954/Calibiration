@@ -1,0 +1,72 @@
+pipes:
+  M1:
+    roughness: 135.0
+    minor_loss: 0.0
+  M2:
+    roughness: 135.0
+    minor_loss: 0.0
+  M3:
+    roughness: 135.0
+    minor_loss: 0.0
+
+  P1:
+    roughness: 135.0
+    minor_loss: 0.0
+
+  P2:
+    roughness: 135.0
+    minor_loss: 0.0
+  P2_1:
+    roughness: 135.0
+    minor_loss: 0.0
+  P2_2:
+    roughness: 135.0
+    minor_loss: 0.0
+  P2_3:
+    roughness: 135.0
+    minor_loss: 0.0
+
+  P3:
+    roughness: 135.0
+    minor_loss: 0.0
+  P3_1:
+    roughness: 135.0
+    minor_loss: 0.0
+  P3_2:
+    roughness: 135.0
+    minor_loss: 0.0
+  P3_3:
+    roughness: 135.0
+    minor_loss: 0.0
+
+  P4:
+    roughness: 135.0
+    minor_loss: 0.0
+  P4_1:
+    roughness: 135.0
+    minor_loss: 0.0
+  P4_2:
+    roughness: 135.0
+    minor_loss: 0.0
+  P4_3:
+    roughness: 135.0
+    minor_loss: 0.0
+
+  P5:
+    roughness: 135.0
+    minor_loss: 0.0
+  P6:
+    roughness: 135.0
+    minor_loss: 0.0
+  P7:
+    roughness: 135.0
+    minor_loss: 0.0
+  P8:
+    roughness: 135.0
+    minor_loss: 0.0
+
+Pump_Headloss:
+  Main_Pump:
+    a:1
+    b:1
+
