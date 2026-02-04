@@ -33,7 +33,7 @@
 ;ID                   Node1                Node2                              Length             Diameter            Roughness           Minor Loss               Status
  M1                   Main_Tank            J1                       3.280839895     1.968503937             100               0                 Open   ;
  M2                   J2                   J3                       3.280839895     1.968503937             100               0                 Open   ;
- M3                   J3                   J4                      5.0524934383     1.968503937             100               0                 Open   ;
+ M3                   J3                   J4                       3.280839895     1.968503937             100               0                 Open   ;
  P1                   J4                   J5                      5.0524934383     1.968503937             100               0                 Open   ;
  P2                   J5                   J5_1                    5.0524934383     1.968503937             100               0                 Open   ;
  P2_1                 J5_1                 J5_2                    5.0524934383     1.968503937             100               0                 Open   ;

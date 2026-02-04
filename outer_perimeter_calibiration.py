@@ -56,13 +56,13 @@ space = [
     Real(5.0, 50.0, name="pump_headloss_a_coeff"),
     Real(100.0, 5000.0, name="pump_headloss_b_coeff"),
 ]
-
-for pipe_id in wn.pipe_name_list:
+wnn = build_water_network()
+for pipe_id in wnn.pipe_name_list:
     space.append(Real(50.0, 200.0, name=f"roughness_coeff_for_pipe_{pipe_id}"))     #these are now safe names
     space.append(Real(0.00,20.00,name = f"Minor_loss_coeff_for_pipe_{pipe_id}"))
 
 
-def modify_network_for_this_sim(theta):
+def modify_network_for_this_sim(theta,wn:wntr.network.model):
 
     DEFAULT_PIPE_ELEVATION_multiplier      = theta["DEFAULT_PIPE_ELEVATION_multiplier"]
     TANK_TO_PUMP_PIPE_ELEVATION_multiplier = theta["TANK_TO_PUMP_PIPE_ELEVATION_multiplier"]
@@ -75,7 +75,7 @@ def modify_network_for_this_sim(theta):
     MAIN_TANK_DIAMETER_multiplier          = theta["MAIN_TANK_DIAMETER_multiplier"]
 
     PUMP_TO_FIRST_BEND_PIPE_LENGTH_multiplier         = theta["PUMP_TO_FIRST_BEND_PIPE_LENGTH_multiplier"]  #error 2 solved
-    FIRST_BEND_TO_GRID_PIPE_LENGTH_multiplier         = theta["FIRST_BEND_TO_GRID_PIPE_LENGTH"]
+    FIRST_BEND_TO_GRID_PIPE_LENGTH_multiplier         = theta["FIRST_BEND_TO_GRID_PIPE_LENGTH_multiplier"]
 
     pump_headloss_a_coeff                  = theta["pump_headloss_a_coeff"]
     pump_headloss_b_coeff                  = theta["pump_headloss_b_coeff"]
@@ -93,8 +93,13 @@ def modify_network_for_this_sim(theta):
 
     junction_list = wn.junction_name_list
     for every_juntion in junction_list:
-        current_junction:wntr.network.Junction = wn.get_node(every_juntion)
-        current_junction.elevation = DEFAULT_PIPE_ELEVATION * DEFAULT_PIPE_ELEVATION_multiplier
+        if not every_juntion == 'J1':
+            current_junction:wntr.network.Junction = wn.get_node(every_juntion)
+            current_junction.elevation = DEFAULT_PIPE_ELEVATION * DEFAULT_PIPE_ELEVATION_multiplier
+        else:
+            current_junction:wntr.network.Junction = wn.get_node(every_juntion)
+            current_junction.elevation = TANK_TO_PUMP_PIPE_ELEVATION*TANK_TO_PUMP_PIPE_ELEVATION_multiplier
+
 
     
     #Vary Measured pipe params by +/- 1%
@@ -136,16 +141,24 @@ def modify_network_for_this_sim(theta):
     
     #atached the curve to the pump
     Mp:wntr.network.Pump = wn.get_link("Main_Pump")
-    Mp._pump_curve_name="MAIN_PUMP_HEADLOSS_CURVE"
+    Mp.pump_curve_name="MAIN_PUMP_HEADLOSS_CURVE"                      #wn is a fresh network everytime 
+                                                                       #this func is called so no need to remove
+                                                                       # the curve ig
+                                                             
+
+
+
+
+
 
 
 
 @use_named_args(space)
 def objective(**theta):
-    modify_network_for_this_sim(theta)
-    sim = wntr.sim.EpanetSimulator(wn)
-    wn = intial_network                        # this should fix the problem of wn drifting away, initial network is defined elsewhere
-                                               #what wn was originally when it was built, error 6 solved
+    wn = build_water_network()
+    modify_network_for_this_sim(theta,wn)      # we will get a fresh default wn every time
+    sim = wntr.sim.WNTRSimulator(wn)
+                        
     results = sim.run_sim()
 
     flows = results.link["flowrate"].iloc[0]    # WE MSUT RPLACE 0 with a value..such that at that time , the 
