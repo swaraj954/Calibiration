@@ -1,0 +1,198 @@
+[TITLE]
+
+[JUNCTIONS]
+;ID                      Elevation       Demand Pattern                 
+ J1                      0.3280839895               0                            ;
+ J2                      2.4606299213               0                            ;
+ J3                      2.4606299213               0                            ;
+ J4                      2.4606299213               0                            ;
+ J5                      2.4606299213               0                            ;
+ J5_1                    2.4606299213               0                            ;
+ J5_2                    2.4606299213               0                            ;
+ J5_3                    2.4606299213               0                            ;
+ J6                      2.4606299213               0                            ;
+ J6_1                    2.4606299213               0                            ;
+ J6_2                    2.4606299213               0                            ;
+ J6_3                    2.4606299213               0                            ;
+ J7                      2.4606299213               0                            ;
+ J7_1                    2.4606299213               0                            ;
+ J7_2                    2.4606299213               0                            ;
+ J7_3                    2.4606299213               0                            ;
+ J8                      2.4606299213               0                            ;
+ J9                      2.4606299213               0                            ;
+ J10                     2.4606299213               0                            ;
+ InnerJ1                 2.4606299213               0                            ;
+ InnerJ2                 2.4606299213               0                            ;
+ InnerJ3                 2.4606299213               0                            ;
+ InnerJ4                 2.4606299213               0                            ;
+ InnerJ5                 2.4606299213               0                            ;
+ InnerJ6                 2.4606299213               0                            ;
+ InnerJ7                 2.4606299213               0                            ;
+ InnerJ8                 2.4606299213               0                            ;
+
+[RESERVOIRS]
+;ID                                   Head                  Pattern
+
+[TANKS]
+;ID                              Elevation           Init Level            Min Level            Max Level             Diameter           Min Volume Volume Curve         Overflow            
+ Main_Tank                          0     3.280839895               0     32.80839895     3.280839895               0                                             ;
+
+[PIPES]
+;ID                   Node1                Node2                              Length             Diameter            Roughness           Minor Loss               Status
+ M1                   Main_Tank            J1                       3.280839895     1.968503937             100               0                 Open   ;
+ M2                   J2                   J3                       3.280839895     1.968503937             100               0                 Open   ;
+ M3                   J3                   J4                       3.280839895     1.968503937             100               0                 Open   ;
+ P1                   J4                   J5                      5.0524934383     1.968503937             100               0                 Open   ;
+ P2                   J5                   J5_1                    5.0524934383     1.968503937             100               0                 Open   ;
+ P2_1                 J5_1                 J5_2                    5.0524934383     1.968503937             100               0                 Open   ;
+ P2_2                 J5_2                 J5_3                    5.0524934383     1.968503937             100               0                 Open   ;
+ P2_3                 J5_3                 J6                      5.0524934383     1.968503937             100               0                 Open   ;
+ P3                   J6                   J6_1                    5.0524934383     1.968503937             100               0                 Open   ;
+ P3_1                 J6_1                 J6_2                    5.0524934383     1.968503937             100               0                 Open   ;
+ P3_2                 J6_2                 J6_3                    5.0524934383     1.968503937             100               0                 Open   ;
+ P3_3                 J6_3                 J7                      5.0524934383     1.968503937             100               0                 Open   ;
+ P4                   J7                   J7_1                    5.0524934383     1.968503937             100               0                 Open   ;
+ P4_1                 J7_1                 J7_2                    5.0524934383     1.968503937             100               0                 Open   ;
+ P4_2                 J7_2                 J7_3                    5.0524934383     1.968503937             100               0                 Open   ;
+ P4_3                 J7_3                 J8                      5.0524934383     1.968503937             100               0                 Open   ;
+ P6                   J8                   J9                      5.0524934383     1.968503937             100               0                 Open   ;
+ P7                   J9                   J10                     5.0524934383     1.968503937             100               0                 Open   ;
+ P8                   J10                  Main_Tank               5.0524934383     1.968503937             100               0                 Open   ;
+ IJ1-IJ2              InnerJ1              InnerJ2                         1000              12             100               0                 Open   ;
+ -IJ1                 J5                   InnerJ1                         1000              12             100               0                 Open   ;
+ IJ2-                 InnerJ2              J8                              1000              12             100               0                 Open   ;
+ IJ3-IJ4              InnerJ3              InnerJ4                         1000              12             100               0                 Open   ;
+ -IJ3                 J5_1                 InnerJ3                         1000              12             100               0                 Open   ;
+ IJ4-                 InnerJ4              J7_3                            1000              12             100               0                 Open   ;
+ IJ5-IJ6              InnerJ5              InnerJ6                         1000              12             100               0                 Open   ;
+ -IJ5                 J5_2                 InnerJ5                         1000              12             100               0                 Open   ;
+ IJ6-                 InnerJ6              J7_2                            1000              12             100               0                 Open   ;
+ IJ7-IJ8              InnerJ7              InnerJ8                         1000              12             100               0                 Open   ;
+ -IJ7                 J5_3                 InnerJ7                         1000              12             100               0                 Open   ;
+ IJ8-                 InnerJ8              J7_1                            1000              12             100               0                 Open   ;
+
+[PUMPS]
+;ID                   Node1                Node2                Properties          
+ Main_Pump            J1                   J2                   HEAD     Filler_curve           ;
+
+[VALVES]
+;ID                   Node1                Node2                            Diameter Type              Setting           Minor Loss
+
+[TAGS]
+;type      name       tag       
+
+[DEMANDS]
+;ID        Demand     Pattern   
+
+[STATUS]
+;ID        Setting   
+
+[PATTERNS]
+;ID        Multipliers
+
+[CURVES]
+;ID         X-Value      Y-Value     
+;PUMP: Filler_curve
+ Filler_curve     0.000000     0.000000   ;
+ Filler_curve 15850.323141     3.280840   ;
+ Filler_curve 31700.646283     6.561680   ;
+
+
+[CONTROLS]
+
+[RULES]
+
+[ENERGY]
+GLOBAL PRICE           0.0000
+
+[EMITTERS]
+;ID        Flow coefficient
+
+[QUALITY]
+
+[SOURCES]
+;Node      Type       Quality    Pattern   
+
+[REACTIONS]
+;Type           Pipe/Tank               Coefficient
+
+ ORDER BULK 1
+ ORDER TANK 1
+ ORDER WALL 1
+ GLOBAL BULK 0.0000    
+ GLOBAL WALL 0.0000    
+
+[MIXING]
+;Tank ID             Model Fraction
+
+[TIMES]
+DURATION             00:00:00
+HYDRAULIC TIMESTEP   01:00:00
+QUALITY TIMESTEP     00:06:00
+PATTERN TIMESTEP     01:00:00
+PATTERN START        00:00:00
+REPORT TIMESTEP      01:00:00
+REPORT START         00:00:00
+START CLOCKTIME      00:00:00 AM
+RULE TIMESTEP        00:06:00
+STATISTIC            NONE      
+
+[REPORT]
+
+[OPTIONS]
+UNITS                GPM                 
+HEADLOSS             H-W                 
+SPECIFIC GRAVITY     1
+VISCOSITY            1
+TRIALS               200
+ACCURACY             0.001
+CHECKFREQ            2
+MAXCHECK             10
+UNBALANCED           STOP                
+PATTERN              1                   
+DEMAND MULTIPLIER    1
+EMITTER EXPONENT     0.5
+QUALITY              NONE                
+DIFFUSIVITY          1
+TOLERANCE            0.01
+
+[COORDINATES]
+;Node      X-Coord    Y-Coord   
+Main_Tank          20.000000000         20.000000000
+J1                 17.000000000         20.000000000
+J2                 15.000000000         20.000000000
+J3                 -1.000000000         20.000000000
+J4                 -1.000000000         18.000000000
+J5                 -1.000000000         16.000000000
+J5_1               -1.000000000         14.000000000
+J5_2               -1.000000000         12.000000000
+J5_3               -1.000000000         10.000000000
+J6                 -1.000000000          0.000000000
+J6_1                3.000000000          0.000000000
+J6_2                7.000000000          0.000000000
+J6_3               10.000000000          0.000000000
+J7                 16.000000000          0.000000000
+J7_1               16.000000000          3.000000000
+J7_2               16.000000000          8.000000000
+J7_3               16.000000000         10.000000000
+J8                 16.000000000         15.000000000
+J9                 16.000000000         17.000000000
+J10                19.000000000         17.000000000
+InnerJ1             3.000000000         15.000000000
+InnerJ2            10.000000000         15.000000000
+InnerJ3             4.000000000         12.000000000
+InnerJ4             9.000000000         11.000000000
+InnerJ5             2.000000000         11.000000000
+InnerJ6             8.000000000          9.000000000
+InnerJ7             2.000000000          8.000000000
+InnerJ8            11.000000000          3.000000000
+
+[VERTICES]
+;Link      X-Coord    Y-Coord   
+
+[LABELS]
+
+[BACKDROP]
+UNITS    NONE
+
+[END]

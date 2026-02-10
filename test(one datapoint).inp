@@ -54,3 +54,118 @@
 
 [PUMPS]
 ;ID                   Node1                Node2                Properties          
+ Main_Pump            J1                   J2                   HEAD     Filler_curve           ;
+
+[VALVES]
+;ID                   Node1                Node2                            Diameter Type              Setting           Minor Loss
+
+[TAGS]
+;type      name       tag       
+
+[DEMANDS]
+;ID        Demand     Pattern   
+
+[STATUS]
+;ID        Setting   
+
+[PATTERNS]
+;ID        Multipliers
+
+[CURVES]
+;ID         X-Value      Y-Value     
+;PUMP: Filler_curve
+ Filler_curve     0.000000     0.000000   ;
+ Filler_curve 15850.323141     3.280840   ;
+ Filler_curve 31700.646283     6.561680   ;
+
+
+[CONTROLS]
+
+[RULES]
+
+[ENERGY]
+GLOBAL PRICE           0.0000
+
+[EMITTERS]
+;ID        Flow coefficient
+
+[QUALITY]
+
+[SOURCES]
+;Node      Type       Quality    Pattern   
+
+[REACTIONS]
+;Type           Pipe/Tank               Coefficient
+
+ ORDER BULK 1
+ ORDER TANK 1
+ ORDER WALL 1
+ GLOBAL BULK 0.0000    
+ GLOBAL WALL 0.0000    
+
+[MIXING]
+;Tank ID             Model Fraction
+
+[TIMES]
+DURATION             00:00:00
+HYDRAULIC TIMESTEP   01:00:00
+QUALITY TIMESTEP     00:06:00
+PATTERN TIMESTEP     01:00:00
+PATTERN START        00:00:00
+REPORT TIMESTEP      01:00:00
+REPORT START         00:00:00
+START CLOCKTIME      00:00:00 AM
+RULE TIMESTEP        00:06:00
+STATISTIC            NONE      
+
+[REPORT]
+
+[OPTIONS]
+UNITS                GPM                 
+HEADLOSS             H-W                 
+SPECIFIC GRAVITY     1
+VISCOSITY            1
+TRIALS               200
+ACCURACY             0.001
+CHECKFREQ            2
+MAXCHECK             10
+UNBALANCED           STOP                
+PATTERN              1                   
+DEMAND MULTIPLIER    1
+EMITTER EXPONENT     0.5
+QUALITY              NONE                
+DIFFUSIVITY          1
+TOLERANCE            0.01
+
+[COORDINATES]
+;Node      X-Coord    Y-Coord   
+Main_Tank          20.000000000         20.000000000
+J1                 17.000000000         20.000000000
+J2                 15.000000000         20.000000000
+J3                 -1.000000000         20.000000000
+J4                 -1.000000000         18.000000000
+J5                 -1.000000000         16.000000000
+J5_1               -1.000000000         14.000000000
+J5_2               -1.000000000         12.000000000
+J5_3               -1.000000000         10.000000000
+J6                 -1.000000000          0.000000000
+J6_1                3.000000000          0.000000000
+J6_2                7.000000000          0.000000000
+J6_3               10.000000000          0.000000000
+J7                 16.000000000          0.000000000
+J7_1               16.000000000          3.000000000
+J7_2               16.000000000          8.000000000
+J7_3               16.000000000         10.000000000
+J8                 16.000000000         15.000000000
+J9                 16.000000000         17.000000000
+J10                19.000000000         17.000000000
+
+[VERTICES]
+;Link      X-Coord    Y-Coord   
+
+[LABELS]
+
+[BACKDROP]
+UNITS    NONE
+
+[END]

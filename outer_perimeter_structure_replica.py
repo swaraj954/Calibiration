@@ -92,10 +92,12 @@ def build_water_network():
     wn.add_pipe("P8", "J10", "Main_Tank", DEFAULT_PIPE_LENGTH, BIG_PIPE_DIAMETER)
 
     # ---- Pump ----
-    wn.add_pump("Main_Pump", "J1", "J2", pump_type="HEAD")
+    wn.add_pump(name = "Main_Pump",start_node_name= "J1",end_node_name= "J2", pump_type="HEAD",pump_parameter="Filler_curve")
+    wn.add_curve("Filler_curve","HEAD",[(0,0),(1,1),(2,2)])
 
 
-    wntr.network.write_inpfile(wn,"Replica_Network(one datapoint).inp")
+    wntr.network.write_inpfile(wn,"test(one datapoint).inp")
     return wn
 
 
+build_water_network()
