@@ -52,7 +52,7 @@ def build_water_network():
     wn.add_junction("J6", elevation=DEFAULT_PIPE_ELEVATION,coordinates=(-1,0))
     wn.add_junction("J6_1", elevation=DEFAULT_PIPE_ELEVATION,coordinates=(3,0))
     wn.add_junction("J6_2", elevation=DEFAULT_PIPE_ELEVATION,coordinates=(7,0))
-    wn.add_junction("J6_3", elevation=DEFAULT_PIPE_ELEVATION,coordinates=(10,0))
+    #wn.add_junction("J6_3", elevation=DEFAULT_PIPE_ELEVATION,coordinates=(10,0))
     wn.add_junction("J7", elevation=DEFAULT_PIPE_ELEVATION,coordinates=(16,0))
     wn.add_junction("J7_1", elevation=DEFAULT_PIPE_ELEVATION,coordinates=(16,3))
     wn.add_junction("J7_2", elevation=DEFAULT_PIPE_ELEVATION,coordinates=(16,8))
@@ -75,8 +75,10 @@ def build_water_network():
 
     wn.add_pipe("P3", "J6", "J6_1", DEFAULT_PIPE_LENGTH, BIG_PIPE_DIAMETER)
     wn.add_pipe("P3_1", "J6_1", "J6_2", DEFAULT_PIPE_LENGTH, BIG_PIPE_DIAMETER)
-    wn.add_pipe("P3_2", "J6_2", "J6_3", DEFAULT_PIPE_LENGTH, BIG_PIPE_DIAMETER)
-    wn.add_pipe("P3_3", "J6_3", "J7", DEFAULT_PIPE_LENGTH, BIG_PIPE_DIAMETER)
+    #wn.add_pipe("P3_2", "J6_2", "J6_3", DEFAULT_PIPE_LENGTH, BIG_PIPE_DIAMETER)
+    #wn.add_pipe("P3_3", "J6_3", "J7", DEFAULT_PIPE_LENGTH, BIG_PIPE_DIAMETER)
+    #Correction:
+    wn.add_pipe("P3_3", "J6_2", "J7", DEFAULT_PIPE_LENGTH, BIG_PIPE_DIAMETER)
 
 
     wn.add_pipe("P4", "J7", "J7_1", DEFAULT_PIPE_LENGTH, BIG_PIPE_DIAMETER)

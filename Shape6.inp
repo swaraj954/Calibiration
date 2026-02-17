@@ -44,12 +44,12 @@
  P1                   J4                   J5                      5.0524934383     1.968503937             100               0                 Open   ;
  P2                   J5                   J5_1                    5.0524934383     1.968503937             100               0                 Open   ;
  P2_1                 J5_1                 J5_2                    5.0524934383     1.968503937             100               0                 Open   ;
- P2_2                 J5_2                 J5_3                    5.0524934383     1.968503937             100               0                 Open   ;
- P2_3                 J5_3                 J6                      5.0524934383     1.968503937             100               0                 Open   ;
- P3                   J6                   J6_1                    5.0524934383     1.968503937             100               0                 Open   ;
- P3_1                 J6_1                 J6_2                    5.0524934383     1.968503937             100               0                 Open   ;
- P3_3                 J6_2                 J7                      5.0524934383     1.968503937             100               0                 Open   ;
- P4                   J7                   J7_1                    5.0524934383     1.968503937             100               0                 Open   ;
+ P2_2                 J5_2                 J5_3                    5.0524934383     1.968503937             100               0               Closed   ;
+ P2_3                 J5_3                 J6                      5.0524934383     1.968503937             100               0               Closed   ;
+ P3                   J6                   J6_1                    5.0524934383     1.968503937             100               0               Closed   ;
+ P3_1                 J6_1                 J6_2                    5.0524934383     1.968503937             100               0               Closed   ;
+ P3_3                 J6_2                 J7                      5.0524934383     1.968503937             100               0               Closed   ;
+ P4                   J7                   J7_1                    5.0524934383     1.968503937             100               0               Closed   ;
  P4_1                 J7_1                 J7_2                    5.0524934383     1.968503937             100               0                 Open   ;
  P4_2                 J7_2                 J7_3                    5.0524934383     1.968503937             100               0                 Open   ;
  P4_3                 J7_3                 J8                      5.0524934383     1.968503937             100               0                 Open   ;
@@ -57,25 +57,25 @@
  P7                   J9                   J10                     5.0524934383     1.968503937             100               0                 Open   ;
  P8                   J10                  Main_Tank               5.0524934383     1.968503937             100               0                 Open   ;
  IJ1-IJ2              InnerJ1              InnerJ2                         1000              12             100               0                 Open   ;
- -IJ1                 J5                   InnerJ1                         1000              12             100               0                 Open   ;
- IJ2-                 InnerJ2              J8                              1000              12             100               0                 Open   ;
+ -IJ1                 J5                   InnerJ1                         1000              12             100               0               Closed   ;
+ IJ2-                 InnerJ2              J8                              1000              12             100               0               Closed   ;
  IJ3-IJ4              InnerJ3              InnerJ4                         1000              12             100               0                 Open   ;
  -IJ3                 J5_1                 InnerJ3                         1000              12             100               0                 Open   ;
- IJ4-                 InnerJ4              J7_3                            1000              12             100               0                 Open   ;
+ IJ4-                 InnerJ4              J7_3                            1000              12             100               0               Closed   ;
  IJ5-IJ6              InnerJ5              InnerJ6                         1000              12             100               0                 Open   ;
  -IJ5                 J5_2                 InnerJ5                         1000              12             100               0                 Open   ;
- IJ6-                 InnerJ6              J7_2                            1000              12             100               0                 Open   ;
+ IJ6-                 InnerJ6              J7_2                            1000              12             100               0               Closed   ;
  IJ7-IJ8              InnerJ7              InnerJ8                         1000              12             100               0                 Open   ;
  -IJ7                 J5_3                 InnerJ7                         1000              12             100               0                 Open   ;
  IJ8-                 InnerJ8              J7_1                            1000              12             100               0                 Open   ;
  IJ1-IJ3              InnerJ1              InnerJ3                         1000              12             100               0                 Open   ;
  IJ2-IJ4              InnerJ2              InnerJ4                         1000              12             100               0                 Open   ;
- IJ3-IJ5              InnerJ3              InnerJ5                         1000              12             100               0                 Open   ;
+ IJ3-IJ5              InnerJ3              InnerJ5                         1000              12             100               0               Closed   ;
  IJ5-IJ7              InnerJ5              InnerJ7                         1000              12             100               0                 Open   ;
  IJ7-IJ61             InnerJ7              J6_1                            1000              12             100               0                 Open   ;
  IJ4-IJ6              InnerJ4              InnerJ6                         1000              12             100               0                 Open   ;
  IJ6-IJ8              InnerJ6              InnerJ8                         1000              12             100               0                 Open   ;
- IJ8-IJ61             InnerJ8              J6_2                            1000              12             100               0                 Open   ;
+ IJ8-IJ61             InnerJ8              J6_2                            1000              12             100               0               Closed   ;
 
 [PUMPS]
 ;ID                   Node1                Node2                Properties          
