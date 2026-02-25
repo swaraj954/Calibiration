@@ -34,7 +34,7 @@
 
 [TANKS]
 ;ID                              Elevation           Init Level            Min Level            Max Level             Diameter           Min Volume Volume Curve         Overflow            
- Main_Tank                          0     3.280839895               0     32.80839895     3.280839895               0                                             ;
+ Main_Tank                          0     3280.839895               0     3280839.895     328.0839895               0                                             ;
 
 [PIPES]
 ;ID                   Node1                Node2                              Length             Diameter            Roughness           Minor Loss               Status
@@ -69,7 +69,7 @@
  -IJ7                 J5_3                 InnerJ7                         1000              12             100               0                 Open   ;
  IJ8-                 InnerJ8              J7_1                            1000              12             100               0                 Open   ;
  IJ1-IJ3              InnerJ1              InnerJ3                         1000              12             100               0                 Open   ;
- IJ2-IJ4              InnerJ2              InnerJ4                         1000              12             100               0                 Open   ;
+ IJ4-IJ2              InnerJ4              InnerJ2                         1000              12             100               0                 Open   ;
  IJ3-IJ5              InnerJ3              InnerJ5                         1000              12             100               0                 Open   ;
  IJ5-IJ7              InnerJ5              InnerJ7                         1000              12             100               0                 Open   ;
  IJ7-IJ61             InnerJ7              J6_1                            1000              12             100               0                 Open   ;
@@ -99,9 +99,9 @@
 [CURVES]
 ;ID         X-Value      Y-Value     
 ;PUMP: Filler_curve
- Filler_curve     0.000000     0.000000   ;
- Filler_curve 15850.323141     3.280840   ;
- Filler_curve 31700.646283     6.561680   ;
+ Filler_curve     0.000000   328.083990   ;
+ Filler_curve 15850.323141   262.467192   ;
+ Filler_curve 31700.646283    32.808399   ;
 
 
 [CONTROLS]

@@ -62,7 +62,7 @@ for pipe_id in wnn.pipe_name_list:
     space.append(Real(0.00,20.00,name = f"Minor_loss_coeff_for_pipe_{pipe_id}"))
 
 
-def modify_network_for_this_sim(theta,wn:wntr.network.model):
+def modify_network_for_this_sim(theta,wn:wntr.network.WaterNetworkModel):
 
     DEFAULT_PIPE_ELEVATION_multiplier      = theta["DEFAULT_PIPE_ELEVATION_multiplier"]
     TANK_TO_PUMP_PIPE_ELEVATION_multiplier = theta["TANK_TO_PUMP_PIPE_ELEVATION_multiplier"]

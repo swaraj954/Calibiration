@@ -8,9 +8,9 @@ import pandas as pd
 CM = 0.01
 MM = 0.001
 
-INITIAL_MAIN_TANK_LEVEL = 100 * CM        #not measured in space
-MAX_MAIN_TANK_LEVEL = 1000 * CM           # not measured in space
-MAIN_TANK_DIAMETER = 100 * CM             #not measured 
+INITIAL_MAIN_TANK_LEVEL = 100000 * CM        #not measured in space
+MAX_MAIN_TANK_LEVEL = 100000000 * CM           # not measured in space
+MAIN_TANK_DIAMETER = 10000 * CM             #not measured 
 
 DEFAULT_PIPE_LENGTH = 154 * CM             #not emasured in space
 SMALL_PIPE_DIAMETER = 20 * MM              # in space
@@ -95,7 +95,7 @@ def build_water_network():
 
     # ---- Pump ----
     wn.add_pump(name = "Main_Pump",start_node_name= "J1",end_node_name= "J2", pump_type="HEAD",pump_parameter="Filler_curve")
-    wn.add_curve("Filler_curve","HEAD",[(0,0),(1,1),(2,2)])
+    wn.add_curve("Filler_curve","HEAD",[(0,100),(1,80),(2,10)])
 
 
     wntr.network.write_inpfile(wn,"test(one datapoint).inp")

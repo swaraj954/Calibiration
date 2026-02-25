@@ -47,7 +47,10 @@ def build_full_water_network():
     #add vertical pipes
 
     outer_struc.add_pipe("IJ1-IJ3","InnerJ1","InnerJ3")
-    outer_struc.add_pipe("IJ2-IJ4","InnerJ2","InnerJ4")
+
+    #outer_struc.add_pipe("IJ2-IJ4","InnerJ2","InnerJ4")
+
+    outer_struc.add_pipe("IJ4-IJ2","InnerJ4","InnerJ2")# same as prev but reversed
 
     outer_struc.add_pipe("IJ3-IJ5","InnerJ3","InnerJ5")
     outer_struc.add_pipe("IJ5-IJ7","InnerJ5","InnerJ7")
@@ -109,7 +112,7 @@ def make_shape(full_model:wntr.network.WaterNetworkModel,open_probability = 0.5)
 
     return return_value
 
-#AI generated
+
 def get_adjacency(wn):
     adjacency = {node: [] for node in wn.node_name_list}
 
@@ -124,19 +127,19 @@ def get_adjacency(wn):
     return adjacency
 
 
-#Ai generated
+
 def random_walk_path(wn, start_node, end_node):
 
     adjacency = get_adjacency(wn)
 
     visited = set()
-    stack = [(start_node, [])]  # (current_node, path_pipes)
+    stack = [(start_node, [])] 
 
     while stack:
         current, path = stack.pop()
 
         if current == end_node:
-            return path  # list of pipe names
+            return path 
 
         if current in visited:
             continue
@@ -150,13 +153,13 @@ def random_walk_path(wn, start_node, end_node):
             if neighbor not in visited:
                 stack.append((neighbor, path + [pipe_name]))
 
-    return None  # no path found (shouldn't happen in grid)
+    return None  
 
 
 
 def prune_non_path_pipes(wn, start_node, end_node):
 
-    # 1️⃣ Build graph of OPEN pipes
+    
     G = nx.Graph()
 
     for node in wn.node_name_list:
@@ -167,16 +170,16 @@ def prune_non_path_pipes(wn, start_node, end_node):
         if pipe.initial_status == LinkStatus.OPEN:
             G.add_edge(pipe.start_node_name, pipe.end_node_name)
 
-    # 2️⃣ Nodes reachable from start
+    
     reachable_from_start = nx.node_connected_component(G, start_node)
 
-    # 3️⃣ Nodes reachable from end
+    
     reachable_from_end = nx.node_connected_component(G, end_node)
 
-    # 4️⃣ Only keep nodes that are in BOTH
+    
     valid_nodes = reachable_from_start.intersection(reachable_from_end)
 
-    # 5️⃣ Close pipes that touch invalid nodes
+    
     for pipe_name in wn.pipe_name_list:
         pipe = wn.get_link(pipe_name)
 
@@ -195,10 +198,65 @@ def open_non_grid_pipes(full_network:wntr.network.WaterNetworkModel):
         
 
 
+def remove_dead_ends(wn, start_node, end_node):
+
+    while True:
+
+        
+        G = nx.Graph()
+        for pipe_name in wn.pipe_name_list:
+            pipe = wn.get_link(pipe_name)
+            if pipe.initial_status == LinkStatus.OPEN:
+                G.add_edge(pipe.start_node_name, pipe.end_node_name, pipe=pipe_name)
+
+        
+        dead_nodes = [
+            n for n in G.nodes
+            if G.degree(n) <= 1 and n not in (start_node, end_node)
+        ]
+
+        if not dead_nodes:
+            break  
+        
+        for node in dead_nodes:
+            for neighbor in list(G.neighbors(node)):
+                pipe_name = G.edges[node, neighbor]["pipe"]
+                wn.get_link(pipe_name).initial_status = LinkStatus.CLOSED
 
 
 
-#Ai generated
+
+# def make_shape_random_walk(full_model):
+
+#     start_node = "J5"
+#     end_node   = "J8"
+
+#     # 1️⃣ Close all pipes first
+#     for pipe_name in full_model.pipe_name_list:
+#         full_model.get_link(pipe_name).initial_status = LinkStatus.CLOSED
+
+#     # 2️⃣ Generate random backbone path
+#     backbone_pipes = random_walk_path(full_model, start_node, end_node)
+
+#     if backbone_pipes is None:
+#         return False
+
+#     # 3️⃣ Open backbone pipes
+#     for pipe_name in backbone_pipes:
+#         full_model.get_link(pipe_name).initial_status = LinkStatus.OPEN
+
+#     # 4️⃣ OPTIONAL: Add random extra pipes for complexity
+#     for pipe_name in full_model.pipe_name_list:
+#         if pipe_name not in backbone_pipes:
+#             if random.random() < 0.5:  # extra complexity factor
+#                 full_model.get_link(pipe_name).initial_status = LinkStatus.OPEN
+    
+#     prune_non_path_pipes(full_model, start_node, end_node)
+#     open_non_grid_pipes(full_model)
+#     remove_dead_ends(full_model,start_node=start_node,end_node=end_node)
+#     return True
+
+
 def make_shape_random_walk(full_model):
 
     start_node = "J5"
@@ -221,11 +279,32 @@ def make_shape_random_walk(full_model):
     # 4️⃣ OPTIONAL: Add random extra pipes for complexity
     for pipe_name in full_model.pipe_name_list:
         if pipe_name not in backbone_pipes:
-            if random.random() < 0.3:  # extra complexity factor
+            if random.random() < 0.5:  # extra complexity factor
                 full_model.get_link(pipe_name).initial_status = LinkStatus.OPEN
-    
+
     prune_non_path_pipes(full_model, start_node, end_node)
     open_non_grid_pipes(full_model)
+    remove_dead_ends(full_model, start_node=start_node, end_node=end_node)
+
+    
+    G = nx.Graph()
+    for pipe_name in full_model.pipe_name_list:
+        pipe = full_model.get_link(pipe_name)
+        if pipe.initial_status == LinkStatus.OPEN:
+            G.add_edge(pipe.start_node_name,
+                       pipe.end_node_name)
+
+   
+    m = G.number_of_edges()
+    n = G.number_of_nodes()
+
+    
+    loops = m - n + 1
+
+   
+    if loops < 1:
+        return False
+
     return True
 
 
@@ -236,10 +315,11 @@ def reset(full_model:wntr.network.WaterNetworkModel):
         actual_pipe:wntr.network.Pipe= full_model.get_link(pipe)
         actual_pipe.intial_status = wntr.network.LinkStatus.Open
 
-def close_all_pipes(wn:wntr.network.WaterNetworkModel):
+def close_all_pipes(wn:wntr.network.WaterNetworkModel,excluded_pipes):
     for pipe in wn.pipe_name_list:
-        actual_pipe:wntr.network.Pipe = wn.get_link(pipe)
-        actual_pipe.initial_status=wntr.network.LinkStatus.Closed
+        if pipe not in excluded_pipes:
+            actual_pipe:wntr.network.Pipe = wn.get_link(pipe)
+            actual_pipe.initial_status=wntr.network.LinkStatus.Closed
 
 
 
@@ -263,8 +343,29 @@ def plot_open_pipes(inp_file):
     
 
     plt.title("Open Pipes Only")
-    plt.show()
+    #plt.show()
+    fig = plt.gcf()
+    ax = plt.gca()
+    return fig,ax
 
+
+def plot_open_pipess(wn:wntr.network.WaterNetworkModel):
+    open_pipes = [
+        pipe_name
+        for pipe_name in wn.pipe_name_list
+        if wn.get_link(pipe_name).initial_status == wntr.network.LinkStatus.Open
+    ]
+
+   
+    plt.figure()
+    wntr.graphics.plot_network(wn=wn,link_attribute=open_pipes,node_size=30,link_width=2)
+    
+
+    plt.title("Open Pipes Only")
+    #plt.show()
+    fig = plt.gcf()
+    ax = plt.gca()
+    return fig,ax
         
         
 def gen_ip_files(number_of_files,open_prob = 0.5):
@@ -281,12 +382,20 @@ def gen_ip_files(number_of_files,open_prob = 0.5):
             print("FALSEEEE")
         
 
+def open_pipes(wn:wntr.network.WaterNetworkModel,pipes=[]):
+    for pipe in pipes:
+        actual_pipe:wntr.network.Pipe = wn.get_link(pipe)
+        actual_pipe.initial_status = wntr.network.LinkStatus.Open
+    
 
 
 
-gen_ip_files(10)
-for i in range(1,10):
-    plot_open_pipes(f"Shape{i}.inp")
+# gen_ip_files(10)
+# for i in range(1,10):
+#     plot_open_pipes(f"Shape{i}.inp")
+
+
+
 
 
     
@@ -310,8 +419,8 @@ for i in range(1,10):
 
     
 
-os = build_full_water_network()
-make_shape(os)
+#os = build_full_water_network()
+#make_shape(os)
 
 
 
@@ -334,6 +443,6 @@ make_shape(os)
     
 
 
-build_full_water_network()
+
 
     
